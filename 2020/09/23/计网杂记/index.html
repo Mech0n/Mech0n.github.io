@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Computer-Networking-More | Mech0n | 摸鱼ing</title><meta name="description" content="杂记  0x0 复习计网的时候，记录一些零碎的知识。  0x1 应用层  0x2 运输层   流量控制 确保任何一方都不会过快地发送过量的分组而造成分组丢失。 控制发送速率：当接收方来不及接收时，发送端降低发送速率。     0x3网络层   路由表组成 对每组网络接口（interface），路由表至少会存有下面的信息：  网络ID（Network ID, Network number）：就是目"><meta name="keywords" content="ComputerNetwork"><meta name="author" content="Mech0n"><meta name="copyright" content="Mech0n"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Computer-Networking-More"><meta name="twitter:description" content="杂记  0x0 复习计网的时候，记录一些零碎的知识。  0x1 应用层  0x2 运输层   流量控制 确保任何一方都不会过快地发送过量的分组而造成分组丢失。 控制发送速率：当接收方来不及接收时，发送端降低发送速率。     0x3网络层   路由表组成 对每组网络接口（interface），路由表至少会存有下面的信息：  网络ID（Network ID, Network number）：就是目"><meta name="twitter:image" content="https://mech0n.github.io/img/cover/cover7.png"><meta property="og:type" content="article"><meta property="og:title" content="Computer-Networking-More"><meta property="og:url" content="https://mech0n.github.io/2020/09/23/%E8%AE%A1%E7%BD%91%E6%9D%82%E8%AE%B0/"><meta property="og:site_name" content="Mech0n | 摸鱼ing"><meta property="og:description" content="杂记  0x0 复习计网的时候，记录一些零碎的知识。  0x1 应用层  0x2 运输层   流量控制 确保任何一方都不会过快地发送过量的分组而造成分组丢失。 控制发送速率：当接收方来不及接收时，发送端降低发送速率。     0x3网络层   路由表组成 对每组网络接口（interface），路由表至少会存有下面的信息：  网络ID（Network ID, Network number）：就是目"><meta property="og:image" content="https://mech0n.github.io/img/cover/cover7.png"><meta property="article:published_time" content="2020-09-23T12:28:42.000Z"><meta property="article:modified_time" content="2020-09-23T12:30:49.000Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="https://mech0n.github.io/2020/09/23/%E8%AE%A1%E7%BD%91%E6%9D%82%E8%AE%B0/"><link rel="prev" title="Computer-Networking-Chapter-6" href="https://mech0n.github.io/2020/09/23/Computer-Networking-Chapter-6/"><link rel="next" title="Computer-Networking-Chapter-3" href="https://mech0n.github.io/2020/09/23/Computer-Networking-Chapter-3/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">11</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#杂记"><span class="toc-number">1.</span> <span class="toc-text"> 杂记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#0x0"><span class="toc-number">1.0.0.1.</span> <span class="toc-text"> 0x0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x1-应用层"><span class="toc-number">1.0.0.2.</span> <span class="toc-text"> 0x1 应用层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x2-运输层"><span class="toc-number">1.0.0.3.</span> <span class="toc-text"> 0x2 运输层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x3网络层"><span class="toc-number">1.0.0.4.</span> <span class="toc-text"> 0x3网络层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x4-链路层"><span class="toc-number">1.0.0.5.</span> <span class="toc-text"> 0x4 链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#0x5-一些常考的题型"><span class="toc-number">1.0.0.5.1.</span> <span class="toc-text"> 0x5 一些常考的题型</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/img/cover/cover7.png)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Mech0n | 摸鱼ing</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Computer-Networking-More</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2020-09-23 20:28:42"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2020-09-23</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-09-23 20:30:49"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-09-23</span></time></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="杂记"><a class="markdownIt-Anchor" href="#杂记"></a> 杂记</h1>
+<h4 id="0x0"><a class="markdownIt-Anchor" href="#0x0"></a> 0x0</h4>
+<p>复习计网的时候，记录一些零碎的知识。</p>
+<h4 id="0x1-应用层"><a class="markdownIt-Anchor" href="#0x1-应用层"></a> 0x1 应用层</h4>
+<h4 id="0x2-运输层"><a class="markdownIt-Anchor" href="#0x2-运输层"></a> 0x2 运输层</h4>
+<ol>
+<li>
+<p>流量控制</p>
+<p><strong>确保任何一方都</strong>不会过快地发送过量的分组而造成分组丢失。</p>
+<p>控制发送速率：当接收方来不及接收时，发送端降低发送速率。</p>
+</li>
+<li></li>
+</ol>
+<h4 id="0x3网络层"><a class="markdownIt-Anchor" href="#0x3网络层"></a> 0x3网络层</h4>
+<ol>
+<li>
+<p><strong>路由表</strong>组成</p>
+<p>对每组网络接口（interface），路由表至少会存有下面的信息：</p>
+<ol>
+<li><a href="https://zh.wikipedia.org/w/index.php?title=%E7%BD%91%E7%BB%9CID&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">网络ID</a>（Network ID, Network number）：就是<a href="https://zh.wikipedia.org/w/index.php?title=%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9D%80&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">目标地址</a>的网络ID。</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81" target="_blank" rel="noopener">子网掩码</a>（subnet mask）：用来判断IP所属网络</li>
+<li>下一跳地址/接口（Next hop / interface）：就是数据在发送到目标地址的旅途中下一站的地址。其中interface指向next hop（即为下一个route）。一个<a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F_(%E4%BA%92%E8%81%94%E7%BD%91)" target="_blank" rel="noopener">自治系统</a>（AS, Autonomous system）中的route应该包含区域内所有的<a href="https://zh.wikipedia.org/wiki/%E5%AD%90%E7%B6%B2%E8%B7%AF" target="_blank" rel="noopener">子网</a>，而<a href="https://zh.wikipedia.org/wiki/%E9%BB%98%E8%AE%A4%E7%BD%91%E5%85%B3" target="_blank" rel="noopener">默认网关</a>（Network id: <code>0.0.0.0</code>, Netmask: <code>0.0.0.0</code>）指向自治系统的出口。</li>
+</ol>
+<p>根据应用和执行的不同，路由表可能含有如下附加信息：</p>
+<ol>
+<li><a href="https://zh.wikipedia.org/w/index.php?title=%E8%8A%B1%E8%B4%B9&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">花费</a>（Cost）：就是数据发送过程中通过路径所需要的花费。</li>
+<li>路由的服务质量</li>
+<li>路由中需要过滤的出/入连接列表</li>
+</ol>
+<p>路由表也是一个网络安全的关键，像<a href="https://zh.wikipedia.org/w/index.php?title=%E5%8D%95%E6%92%AD%E5%8F%AF%E9%80%86%E8%B7%AF%E5%BE%84%E4%BC%A0%E8%BE%93&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">单播可逆路径传输</a>（uRPF）[<a href="https://zh.wikipedia.org/zh-sg/%E8%B7%AF%E7%94%B1%E8%A1%A8#cite_note-3" target="_blank" rel="noopener">3]</a>就是一个安全路由表的例子。在这种具有多种变体的技术中，路由器也在路由表中查找数据包的<a href="https://zh.wikipedia.org/w/index.php?title=%E6%BA%90%E5%9C%B0%E5%9D%80&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">源地址</a>，如果源地址不正确，数据包就会显示出错或受到攻击。</p>
+</li>
+</ol>
+<h4 id="0x4-链路层"><a class="markdownIt-Anchor" href="#0x4-链路层"></a> 0x4 链路层</h4>
+<ol>
+<li>
+<p>ARP表</p>
+<p><img src="https://i.loli.net/2019/11/27/EuQUXHAfBa6S2sL.png" alt="" /></p>
+</li>
+</ol>
+<h5 id="0x5-一些常考的题型"><a class="markdownIt-Anchor" href="#0x5-一些常考的题型"></a> 0x5 一些常考的题型</h5>
+<ol>
+<li>
+<p>因特网采用层次路由的原因：</p>
+<ul>
+<li>规模：越来越多的路由器和主机使路由器的计算存储和转发工作变得越来越艰难。</li>
+<li>自制管理：管理者需要对自己区域内的路由器进行管理包括政策方面的因素。</li>
+</ul>
+</li>
+<li>
+<p>AS是如何划分的：</p>
+<ul>
+<li>AS是根据同一管理下的路由器集合划分的。</li>
+</ul>
+</li>
+<li>
+<p>各包含什么常用的选路协议，协议特点是什么？</p>
+<ul>
+<li>自治系统内路由协议：OSPF、RIP</li>
+<li>OSPF：洪泛链路状态和最短路径Djstala算法</li>
+<li>RIP：为信息在系统内的转发提供路由选择，采用DV算法</li>
+<li>自治系统间的路由协议：BGP</li>
+<li>获得每个自治系统间的可达信息：eBGP</li>
+<li>将可达信息在自治系统内部广播：iBGP</li>
+</ul>
+</li>
+<li>
+<p>下图OSPF的路由的作用分别是什么？</p>
+<ul>
+<li>区域内路由：为信息在系统内转发提供路由选择</li>
+<li>区域网关路由：为传递到区域外的分组提供路由选择</li>
+<li>网关路由器：为传递到自制系统外部的分组提供路由选择</li>
+<li>骨干路由器：为分组在区域间转发提供路由选择</li>
+</ul>
+</li>
+<li>
+<p>解释以太网CSMA/CD协议工作过程</p>
+<ol>
+<li>网络层将数据报交给链路层适配器，适配器将数据报封装成帧后，放在适配器缓存中</li>
+<li>适配器监听信道，若当前没有帧在信道中传输，则适配器将帧通过信道传输，若监听到信道忙，它等待到监听不到信号能量，然后开始传输该帧。</li>
+<li>在传输过程中适配器检测到来自其他适配器内的信号能量，它就停止传输帧，并且传输一个48bit的阻塞信号。</li>
+<li>在终止之后，适配器进入了一个指数后退段，在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>m</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">m^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">h</span></span></span></span></span></span></span></span></span></span></span></span>碰撞后，适配器吃随机在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">⋅</mo><mo separator="true">,</mo><msup><mn>2</mn><mi>m</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">{0,1,2,3,···,2^m-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.858832em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span></span></span>中选择一个K值，适配器等待<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi><mo>∗</mo><mn>512</mn><mi mathvariant="normal">比</mi><mi mathvariant="normal">特</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi></mrow><annotation encoding="application/x-tex">K*512比特时间</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">1</span><span class="mord">2</span><span class="mord cjk_fallback">比</span><span class="mord cjk_fallback">特</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">间</span></span></span></span>并返回b步。</li>
+<li>指数会推算法：
+<ul>
+<li>首次碰撞：在{0,1}中选择k，延时<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi><mo>∗</mo><mn>512</mn><mi mathvariant="normal">比</mi><mi mathvariant="normal">特</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi></mrow><annotation encoding="application/x-tex">K*512比特时间</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">1</span><span class="mord">2</span><span class="mord cjk_fallback">比</span><span class="mord cjk_fallback">特</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">间</span></span></span></span>传输时间</li>
+<li>第二次碰撞后，从{0，1，2，3}中选择k</li>
+<li>10次碰撞后，从{0,1,2,···,1023}中选k。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>四种延时：</p>
+<ul>
+<li>传输时延</li>
+<li>传播时延</li>
+<li>处理时延</li>
+<li>排队时延</li>
+</ul>
+</li>
+<li>
+<p>如图，A节点如何利用ARP完成B节点的通信过程：</p>
+<p><img src="https://i.loli.net/2019/11/28/vMtrwSg2WYFIGBh.png" alt="" /></p>
+<ul>
+<li>A将B的IP地址与自己的子网掩码相与，发现A和B并不在一个子网，需要通过A的默认网关（111.111.111.0）进行转发。</li>
+<li>获取默认网关的MAC地址。节点A向他的适配器传递一个ARP查询包，将源MAC地址设置为自己的MAC，目的MAC地址为广播地址（FF:FF:FF:FF:FF:FF）,源IP地址为自己的IP（111.111.111.111）,目的IP为默认网关IP，适配器在链路层将ARP分组封装在数据帧中，并将数据帧发送至链路。默认网关收到数据帧之后，返回A节点一个包含自己MAC地址的ARP包。</li>
+<li>A收到默认网关发送的ARP包之后更新自己ARP表，并将用于通信的数据报的源IP设为自己的IP，然后将目的IP设置为B节点的IP，将数据报发送至链路层封装，源MAC地址设置为自己的MAC地址，目的MAC地址设置为默认网关的MAC地址。发送给默认网关。</li>
+<li>子网1默认网关接收到数据帧，发现此包是向自己寻址的，将帧中的数据发送至网络层，查询转发表，得知数据报要通过子网2的接口（222.222.222.0），然后将数据报发送至链路层，将目的MAC地址设置为B节点的MAC地址，发送至子网B。</li>
+<li>B节点接受数据。依次递交给上层。</li>
+</ul>
+</li>
+<li>
+<p>假设我在一个校园网内，校园网有一个教育网IPA，和三个外网IP分别是B、C、D组成，解释如何利用DHCP与NAT协议的工作原理解决学生上网问题的。</p>
+<ul>
+<li>首先，有题意可知，内网网关IP为A，由这个路由器利用DHCP将NAT和DHCP共同决定IP地址空间分配内网主机，假若内网中同学需要与外网B、C、D通信（或其他外网）。且已经设定好进程源端口，和目的端口。</li>
+<li>主机通过发送DHCP发现报文，源IP设置为0.0.0.0，目的IP设置为255.255.255.255，源端口号为67，目的端口号为68。发送广播包，假设某几个DHCP接收到请求报文，并分配IP，默认网关、子网掩码、租期发送广播包。主机接受到几个DHCP提供报文，主机选择其中一个，并广播DHCP请求报文，选中的DHCP服务器用DHCP ACK报文对DHCP请求报文进行响应，证实要求参数。</li>
+<li>主机得到本机IP之后，与外界通信，在数据报中填写目的端口号和源端口号，将数据报送给网络层封装本机IP和目的IP，再链路层封装，发送至NAT路由器。</li>
+<li>NAT路由器随机选择没有用过的端口，和路由器IP替换数据报中的源端口号，和本机端口号，并将映射关系填写在NAT转发表中，封装向目标IP发送数据帧。</li>
+</ul>
+</li>
+<li>
+<p>访问<a href="www.google.com">谷歌</a>问题</p>
+<ul>
+<li>根据上述先进行DHCP租用。获取本地IP</li>
+<li>DNS查询：ARP获取网关MAC地址（上述题目已说明），随后将DNS查询报文封装，目的IP填入本地DNS服务器IP地址（DHCP服务器已告知），本机IP为源IP，目的端口号为53，协议为UDP，送交链路层，填入本机MAC地址，目的MAC地址填入网关MAC，发送至网关路由。网关路由得到数据帧，查询该目的IP，根据转发表（该转发表已有BGP、RIP、OSPF填写），选择适当输出端口发送该帧。最终DNS服务器得到该查询报文。查询本地缓存是否有<a href="www.google.com">谷歌</a>的记录，如果有，则封装DNS回答报文，封装到UDP报文，反向发送至校园网中本机。如果没有，本地DNS服务器将查询报文发送至根DNS服务器，根DNS服务器发现com前缀，并向本地DNS服务器返回com的顶级域名解析服务器，本地DNS将com的顶级DNS服务器发送查询报文，com注意到google.com的前缀，并向本机DNS服务器返回其权威DNS服务器地址，本机DNS服务器向权威DNS服务器发送查询报文，返回最终的包含其IP的回答报文。</li>
+<li>连接：TCP三次握手，和HTTP报文。</li>
+</ul>
+</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Mech0n</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://mech0n.github.io/2020/09/23/%E8%AE%A1%E7%BD%91%E6%9D%82%E8%AE%B0/">https://mech0n.github.io/2020/09/23/%E8%AE%A1%E7%BD%91%E6%9D%82%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ComputerNetwork/">ComputerNetwork</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/cover5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/09/23/Computer-Networking-Chapter-6/"><img class="prev_cover" src="/img/cover/cover19.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Computer-Networking-Chapter-6</div></div></a></div><div class="next-post pull_right"><a href="/2020/09/23/Computer-Networking-Chapter-3/"><img class="next_cover" src="/img/cover/cover5.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Computer-Networking-Chapter-3</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> Recommend</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/09/23/Computer-Networking-Chapter-4/" title="Computer-Networking-Chapter-4"><img class="relatedPosts_cover" src="/img/cover/cover5.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-23</div><div class="relatedPosts_title">Computer-Networking-Chapter-4</div></div></a></div><div class="relatedPosts_item"><a href="/2020/09/23/Computer-Networking-Chapter-5/" title="Computer-Networking-Chapter-5"><img class="relatedPosts_cover" src="/img/cover/cover16.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-23</div><div class="relatedPosts_title">Computer-Networking-Chapter-5</div></div></a></div><div class="relatedPosts_item"><a href="/2020/09/23/Computer-Networking-Chapter-6/" title="Computer-Networking-Chapter-6"><img class="relatedPosts_cover" src="/img/cover/cover19.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-23</div><div class="relatedPosts_title">Computer-Networking-Chapter-6</div></div></a></div><div class="relatedPosts_item"><a href="/2020/09/23/Computer-Networking-Chapter-1/" title="Computer-Networking-Chapter-1"><img class="relatedPosts_cover" src="/img/cover/cover2.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-23</div><div class="relatedPosts_title">Computer-Networking-Chapter-1</div></div></a></div><div class="relatedPosts_item"><a href="/2020/09/23/Computer-Networking-Chapter-2/" title="Computer-Networking-Chapter-2"><img class="relatedPosts_cover" src="/img/cover/cover1.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-23</div><div class="relatedPosts_title">Computer-Networking-Chapter-2</div></div></a></div><div class="relatedPosts_item"><a href="/2020/09/23/Computer-Networking-Chapter-3/" title="Computer-Networking-Chapter-3"><img class="relatedPosts_cover" src="/img/cover/cover5.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-23</div><div class="relatedPosts_title">Computer-Networking-Chapter-3</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Mech0n</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">简</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="Table of Contents" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script></body></html>
